@@ -21,6 +21,11 @@ The glove uses five flex sensors to detect finger bending, an MPU6050 accelerome
 - SSD1306 OLED display, 128x64 px
 - Jumper wires
 
+## Additional materials
+- glove (preferably leather one, as a reference to The Witcher universe)
+- adhesive tape (may be useful to secure flex sensors and wires)
+
+
 ## How it works
 
 The program reads analog values from five flex sensors placed on the fingers.  
