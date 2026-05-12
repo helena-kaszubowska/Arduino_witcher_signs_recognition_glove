@@ -41,7 +41,7 @@ Based on the combination of finger positions and hand orientation, the program d
 - Quen
 - Axii
 - Yrden
-- Additional custom signs related to The Witcher 3: Wild Hunt
+- Other custom signs related to The Witcher 3: Wild Hunt
 ## Files
 
 | File | Description |
