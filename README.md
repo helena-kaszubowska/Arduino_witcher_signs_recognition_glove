@@ -15,7 +15,7 @@ The glove uses five flex sensors to detect finger bending, an MPU6050 accelerome
 
 ## Hardware
 
-- ESP32-S expansion board
+- ESP32-S3 expansion board
 - 5 flex sensors
 - MPU6050 accelerometer and gyroscope module
 - SSD1306 OLED display, 128x64 px
