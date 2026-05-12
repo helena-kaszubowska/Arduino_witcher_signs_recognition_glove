@@ -22,7 +22,7 @@ The glove uses five flex sensors to detect finger bending, an MPU6050 accelerome
 - Jumper wires
 
 ## Additional materials
-- glove (preferably leather one, as a reference to The Witcher universe)
+- glove (preferably a leather one, as a reference to The Witcher universe)
 - adhesive tape (may be useful to secure flex sensors and wires)
 
 
