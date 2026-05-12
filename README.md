@@ -21,16 +21,6 @@ The glove uses five flex sensors to detect finger bending, an MPU6050 accelerome
 - SSD1306 OLED display, 128x64 px
 - Jumper wires
 
-## Technologies
-
-- Arduino IDE
-- C/C++
-- Adafruit SSD1306 library
-- Adafruit GFX library
-- Adafruit MPU6050 library
-- Adafruit Unified Sensor library
-- Wire library
-
 ## How it works
 
 The program reads analog values from five flex sensors placed on the fingers.  
@@ -46,11 +36,12 @@ Based on the combination of finger positions and hand orientation, the program d
 - Quen
 - Axii
 - Yrden
-- Custom text-based gestures
+- Additional Custom signs
+## Files
 
-## File structure
-
-- `Witcher_Signs.ino` — main Arduino sketch 
+| File | Description |
+|---|---|
+| `Witcher_Signs.ino` | Main Arduino sketch |
 
 ## Notes
 
