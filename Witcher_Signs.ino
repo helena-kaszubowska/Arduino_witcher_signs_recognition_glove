@@ -90,9 +90,6 @@ void displayAard() {
   // Thin lines separating text from the sign
   display.drawLine(25, 0, 25, 64, WHITE);   // Left border
   display.drawLine(103, 0, 103, 64, WHITE); // Right border
-
-  // 5. Send the rendered interface to the screen
-  display.display(); 
 }
 
 const unsigned char bitmapIgni [] PROGMEM = {
@@ -149,9 +146,6 @@ void displayIgni() {
   // Thin lines separating text from the sign
   display.drawLine(25, 0, 25, 64, WHITE);   // Left border
   display.drawLine(103, 0, 103, 64, WHITE); // Right border
-
-  // 5. Send the rendered interface to the screen
-  display.display(); 
 }
 
 const unsigned char bitmapQuen [] PROGMEM = {
@@ -208,9 +202,6 @@ void displayQuen() {
   // Thin lines separating text from the sign
   display.drawLine(25, 0, 25, 64, WHITE);   // Left border
   display.drawLine(103, 0, 103, 64, WHITE); // Right border
-
-  // 5. Send the rendered interface to the screen
-  display.display(); 
 }
 
 const unsigned char bitmapAxii [] PROGMEM = {
@@ -267,9 +258,6 @@ void displayAxii() {
   // Thin lines separating text from the sign
   display.drawLine(25, 0, 25, 64, WHITE);   // Left border
   display.drawLine(103, 0, 103, 64, WHITE); // Right border
-
-  // 5. Send the rendered interface to the screen
-  display.display(); 
 }
 
 const unsigned char bitmapYrden [] PROGMEM = {
@@ -326,9 +314,6 @@ void displayYrden() {
   // Thin lines separating text from the sign
   display.drawLine(25, 0, 25, 64, WHITE);   // Left border
   display.drawLine(103, 0, 103, 64, WHITE); // Right border
-
-  // 5. Send the rendered interface to the screen
-  display.display(); 
 }
 
 void displayZaraza() {
@@ -343,9 +328,6 @@ void displayZaraza() {
   
   // 3. Print Geralt's favorite word
   display.print("ZARAZA");
-
-  // 4. Send to screen
-  display.display();
 }
 
 void displayCurse() {
@@ -356,13 +338,10 @@ void displayCurse() {
   display.setTextColor(WHITE);
   
   // 2. Set cursor to calculated center position (X=4, Y=24)
-  display.setCursor(10, 20);
+  display.setCursor(4, 24);
   
   // 3. Print curse word
   display.print("SPIERDALAJ");
-
-  // 4. Send to screen
-  display.display();
 }
 
 void displayLambert() {
@@ -383,15 +362,28 @@ void displayLambert() {
   // 4. Line 3
   display.setCursor(16, 40); // Y shifted by another 16 pixels
   display.print("TY CHUJU");
+}
 
-  // 5. Send to screen
-  display.display();
+void displayStorm() {
+  display.clearDisplay();
+
+  // 1. Set font size to 2 (12x16 pixels per letter)
+  display.setTextSize(2);
+  display.setTextColor(WHITE);
+  
+  // 2. Line 1
+  display.setCursor(28, 16);
+  display.print("BURZA,");
+  
+  // 3. Line 2
+  display.setCursor(16, 32); // Y shifted by 16 pixels down
+  display.print("PSIAKREW");
 }
 
 // --- CALIBRATION DATA ---
 const int thumbStraight = 2740; const int thumbBent = 2650;
 const int indexStraight = 2620; const int indexBent = 2540;
-const int middleStraight = 2660; const int middleBent = 2600;
+const int middleStraight = 2660; const int middleBent = 2590;
 const int ringStraight = 2670; const int ringBent = 2630;
 const int pinkyStraight = 1000; const int pinkyBent = 400;
 
@@ -400,7 +392,7 @@ const int bentThreshold = 70;      // Finger considered "bent" at 70%
 const int straightThreshold = 30;  // Finger considered "straight" at 30%
 const int hysteresisMargin = 10;   // 10% tolerance when holding a sign
 
-enum SignType { NONE, QUEN, AARD, IGNI, AXII, YRDEN, ZARAZA, CURSE, LAMBERT };
+enum SignType { NONE, QUEN, AARD, IGNI, AXII, YRDEN, ZARAZA, CURSE, LAMBERT, STORM };
 SignType activeSign = NONE;
 
 // Smoothed percentage values (EMA filter memory)
@@ -577,8 +569,7 @@ void loop() {
             // CURSE
             else {
               tolerance = (activeSign == CURSE) ? hysteresisMargin : 0;
-              if (thumbPercentage > (bentThreshold - tolerance) && 
-                  indexPercentage > (bentThreshold - tolerance) && 
+              if (indexPercentage > (bentThreshold - tolerance) && 
                   middlePercentage < (straightThreshold + tolerance) && 
                   ringPercentage > (bentThreshold - tolerance) && 
                   pinkyPercentage > (bentThreshold - tolerance)) {
@@ -598,9 +589,18 @@ void loop() {
                   detectedThisLoop = LAMBERT;
                 }
 
-                // VOID
+                // STORM
                 else {
-                  display.display();
+                  tolerance = (activeSign == STORM) ? hysteresisMargin : 0;
+                  if (thumbPercentage < (straightThreshold + tolerance) && 
+                      indexPercentage > (bentThreshold - tolerance) && 
+                      middlePercentage > (bentThreshold - tolerance) && 
+                      ringPercentage > (bentThreshold - tolerance) && 
+                      pinkyPercentage > (bentThreshold - tolerance) &&
+                      a.acceleration.y > 7) {
+                    displayStorm();
+                    detectedThisLoop = STORM;
+                  }
                 }
               }
             }
@@ -611,5 +611,6 @@ void loop() {
   }
 
   activeSign = detectedThisLoop;
+  display.display();
   delay(25);
 }
