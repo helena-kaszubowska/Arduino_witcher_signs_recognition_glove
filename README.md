@@ -15,8 +15,9 @@ The glove uses five flex sensors to detect finger bending, an MPU6050 accelerome
 
 ## Hardware
 
-- ESP32-S3 expansion board
+- ESP32-S3-N8R2 processor + expansion board
 - 5 flex sensors
+- 5 47K resistors
 - MPU6050 accelerometer and gyroscope module
 - SSD1306 OLED display, 128x64 px
 - Jumper wires
@@ -25,6 +26,8 @@ The glove uses five flex sensors to detect finger bending, an MPU6050 accelerome
 - glove (preferably a leather one, as a reference to The Witcher universe)
 - adhesive tape (may be useful to secure flex sensors and wires)
 
+## Project Scheme
+![Project Circuit Scheme](./project-scheme.svg)
 
 ## How it works
 
@@ -47,6 +50,10 @@ Based on the combination of finger positions and hand orientation, the program d
 | File | Description |
 |---|---|
 | `Witcher_Signs.ino` | Main Arduino sketch |
+| `project-scheme.svg` | An SVG image of the project scheme |
+| `project-scheme.fzz` | Fritzing Sketch of the project (requires the additional parts) |
+| `ESP32-S3-DevKitC-1-N8R8-v1.fzpz` | Additional ESP32-S3 Fritzing Part |
+| `ESP32-S3-Terminal-Adapter.fzpz` | Additional ESP32-S3 Terminal Adapter Fritzing Part |
 
 ## Notes
 
