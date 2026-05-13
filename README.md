@@ -37,6 +37,11 @@ The sensor values are mapped to percentage values and smoothed using an exponent
 The MPU6050 module is used to read acceleration data and determine the orientation of the hand.  
 Based on the combination of finger positions and hand orientation, the program detects a specific gesture and displays the corresponding Witcher sign or message on the OLED screen.
 
+![Glove photo](./IMG_2437.jpeg)
+
+A full video is also available:
+https://youtube.com/shorts/uift4n4R0fs?is=IKjCrlNz5W1MKqai
+
 ## Detected gestures
 
 - Aard
